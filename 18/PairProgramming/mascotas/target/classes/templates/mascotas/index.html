@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html  xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>Mascotas</title>
+	</head>
+	<body>
+		<a th:href="@{/}">Menu</a>
+		<a th:href="@{/mascotas/create}">Add pet</a>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Description</th>
+                    <th>Race</th>
+                    <th>Actions</th>
+				</tr>
+			</thead>
+            
+			<tbody>
+                
+				<tr th:each="mascota: ${mascotas}">
+					<td th:text="${mascota.id}"></td>
+					<td th:text="${mascota.name}"></td>
+					<td th:text="${mascota.description}"></td>
+                    <td th:text="${mascota.race}"></td>
+					<td>
+						<a th:href="@{/mascotas/update/{id}(id = ${mascota.id})}">Edit</a>
+						<a th:href="@{/mascotas/delete/{id}(id = ${mascota.id})}">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

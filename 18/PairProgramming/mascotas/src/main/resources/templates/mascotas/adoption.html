@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html  xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>Mascotas</title>
+	</head>
+	<body>
+		<a th:href="@{/}">Menu</a>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Description</th>
+                    <th>Race</th>
+                    <th>Actions</th>
+				</tr>
+			</thead>
+            
+			<tbody>
+                
+				<tr th:each="mascota: ${mascotas}">
+					<td th:text="${mascota.id}"></td>
+					<td th:text="${mascota.name}"></td>
+					<td th:text="${mascota.description}"></td>
+                    <td th:text="${mascota.race}"></td>
+					<td>
+						<a th:href="@{/mascotas/adopt/{id}(id = ${mascota.id})}">Adoptar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
