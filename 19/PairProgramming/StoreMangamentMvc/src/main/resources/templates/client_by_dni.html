@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	  layout:decorate="~{./layouts/skeleton}">
+	<head>
+		<title>Clients management</title>
+	</head>
+	<body>
+		<span layout:fragment="TITLE_PAGE">
+			Clients Management
+		</span>
+		<main layout:fragment="CONTENT_PAGE">
+			<div th:if="${client != null}">
+			<table class="table table-hover table-dark table-responsive table-condensed">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Name</th>
+						<th scope="col">Last name</th>
+						<th scope="col">Dni</th>
+						<th scope="col">Email</th>
+						<th scope="col">Address</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td th:text="${client.id}" ></td>
+						<td th:text="${client.name}"></td>
+						<td th:text="${client.lastName}"></td>
+						<td th:text="${client.dni}"></td>
+						<td th:text="${client.email}"></td>
+						<td th:text="${client.address}"></td>
+						<td> 
+							<div class="btn-group">
+								<a class="btn btn-primary" th:href="@{/clients/update/{id}(id = ${client.id})}">Edit</a>
+								<a class="btn btn-danger" th:href="@{/clients/delete/{id}(id = ${client.id})}">Delete</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			 </div>
+			<div th:if="${client == null}">
+				<h1>
+					The client doesn't exists'
+				</h1>
+			</div>
+			
+		</main>
+
+	</body>
+</html>

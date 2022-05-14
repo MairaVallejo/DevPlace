@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	  layout:decorate="~{./layouts/skeleton}">
+	<head>
+		<title>Clients management</title>
+	</head>
+	<body>
+		<span layout:fragment="TITLE_PAGE">
+			Clients Management
+		</span>
+		<main layout:fragment="CONTENT_PAGE">
+			<form th:action="@{/clients/dni}" method="post" class="m-2">
+					<input type="number"  name="dni" placeholder="find by dni" required/>
+					<button type="submit" class="btn btn-sm btn-primary">
+						Find Client
+					</button>
+			</form>
+			<table class="table table-hover table-dark table-responsive table-condensed">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th>Image</th>
+						<th scope="col">Name</th>
+						<th scope="col">Last name</th>
+						<th scope="col">Dni</th>
+						<th scope="col">Email</th>
+						<th scope="col">Address</th>
+						
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="client: ${clients}">
+						<td th:text="${client.id}" ></td>
+						<td th:if="${client.image != null}"><img th:src="@{/clients/images/{image} (image = ${client.image})}" /></td>
+						<td th:if="${client.image == null}">There's no image</td>
+						<td th:text="${client.name}"></td>
+						<td th:text="${client.lastName}"></td>
+						<td th:text="${client.dni}"></td>
+						<td th:text="${client.email}"></td>
+						<td th:utext="${client.address}"></td>
+						<td> 
+							<div class="btn-group">
+								<a class="btn btn-primary" th:href="@{/clients/update/{id}(id = ${client.id})}">Edit</a>
+								<a class="btn btn-danger" th:href="@{/clients/delete/{id}(id = ${client.id})}">Delete</a>
+							</div>
+						</td>
+					</tr>
+					
+					<tr th:if="${clients.isEmpty()}" style="text-align:center;">
+						<td colspan="7">
+							There's no clients
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="alert alert-dismissible fade show" th:classappend="'alert-' + (${class != null}? ${class} : '')" th:if="${message != null}" role="alert" >
+  				<span th:text="${message}"></span>
+  				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</main>
+	</body>
+</html>
